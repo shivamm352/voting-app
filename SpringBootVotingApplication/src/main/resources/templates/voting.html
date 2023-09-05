@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Voting Page</title>
+</head>
+
+<body>
+	<h1>Welcome to the Voting Page</h1>
+
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<form th:action="@{/candidate/add}" method="post">
+			<label for="name">Candidate Name:</label> <input type="text" id="name" name="name" required />
+			<button type="submit">Add candidate</button>
+		</form>
+
+		<div th:if="${ not#lists.isEmpty(candidates)}">
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Votes</th>
+				</tr>
+				<tr th:each="candidate :${candidates}">
+					<td th:text="${candidate.name}"></td>
+					<td th:text="${candidate.votes}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div sec:authorize="hasRole('ROLE_USER')">
+		<form th:action="@{/users/vote}" method="post" th:object="${candidateResponse}">
+			<h2>Candidates:</h2>
+			<div th:each="candidate :${candidates}">
+
+				<input type="radio" th:field="*{id}" th:value="${candidate.id}">
+				<label class="custom-control-label" th:text="${candidate.name}">model</label>
+
+			</div>
+			<button type="submit">Vote</button>
+		</form>
+	</div>
+</body>
+
+</html>
