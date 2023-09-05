@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Welcome to the Voting Application</title>
+</head>
+<body>
+	<h1>Welcome to the Voting Application</h1>
+
+
+
+	<!-- Registration Form -->
+	<div id="register-content" class="tab-content active-tab">
+		<h2>Registration</h2>
+		<form th:action="@{/users/register}" method="post">
+			<label for="name">Name:</label> <input type="text" id="name"
+				name="name" required /><br /> <label for="username">Username:</label>
+			<input type="text" id="usernameForRegister" name="username" required /><br />
+			<label for="email">Email:</label> <input type="email" id="email"
+				name="email" required /><br /> <label for="password">Password:</label>
+			<input type="password" id="passwordForRegister" name="password"
+				required /><br /> <label for="phone">Phone:</label> <input
+				type="text" id="phone" name="phone" required /><br />
+
+			<!-- <div sec:authorize="hasRole('ROLE_ADMIN')">
+				<label for="roles">Roles: <input type="checkbox"
+					name="roles" th:value="ROLE_ADMIN" th:text="ADMIN" /> <input
+					type="checkbox" name="roles" th:value="ROLE_USER" th:text="USER" />
+				</label> <br />
+			</div> -->
+			<button type="submit">Register</button>
+		</form>
+	</div>
+
+	<br />
+	<a class="nav-link active" id="register-tab" data-toggle="tab"
+		href="/users/login">Login</a>
+
+</body>
+</html>
